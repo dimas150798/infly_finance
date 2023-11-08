@@ -1,0 +1,236 @@
+/* CSS */
+.button-74 {
+    width: 100%;
+    height: 90%;
+    background-color: #E8F5E9;
+    border: 2px solid #1B5E20;
+    border-radius: 30px;
+    box-shadow: #1B5E20 3px 3px 0 0;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0 12px;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+.button-74:hover {
+    background-color: #fff;
+    color: #000000;
+}
+
+.button-74:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+}
+
+@media screen and (max-width: 480px) {
+.button-74 {
+    width: 120%;
+    height: 90%;
+    }
+}
+
+
+/* Gaya default untuk tombol pada tampilan desktop */
+.menu-side {
+    width: 30%;
+    height: 80%;
+    background-color: #E8F5E9;
+    border: 2px solid #1B5E20;
+    border-radius: 5px;
+    box-shadow: #1B5E20 3px 3px 0 0;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 12px;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+/* Tombol yang aktif */
+.menu-side.active {
+    background-color: #66BB6A; 
+    color: #fff; 
+    border-radius: 5px; 
+}
+
+/* Tombol yang tidak aktif saat dihover */
+.menu-side:not(.active):hover {
+    background-color: #fff;
+    color: #000000;
+}
+
+/* Gaya untuk tampilan mobile (lebar kurang dari 768px) */
+@media (max-width: 768px) {
+    .menu-side {
+        width: 100%; /* Mengisi seluruh lebar layar */
+        height: auto; /* Tinggi fleksibel sesuai kontennya */
+        font-size: 14px; /* Ukuran font lebih kecil untuk mobile */
+        line-height: 30px; /* Atur ketinggian baris sesuai dengan ukuran font */
+    }
+
+    .menu-container {
+        display: flex;
+        flex-direction: column; /* Menata tombol secara vertikal */
+    }
+}
+
+
+
+/* Dropdown Action Table */
+.dropdown .btn-secondary {
+    background-color: #FF9800;
+    color: #fff;
+    border: none;
+    width: 70%;
+    border-radius: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -ms-border-radius: 9px;
+    -o-border-radius: 9px;
+}
+
+.dropdown-menu {
+    background-color: #4a4c4d;
+    border: 2px solid #ffffff;
+}
+
+.dropdown-item {
+    color: #fff;
+}
+
+.dropdown-item:hover {
+    background-color: #E0E0E0;
+    color: #000000;
+}
+/* End Dropdown Action Table */
+
+
+/* Dropdown Fitur */
+.dropdown-fitur .btn-secondary {
+    width: 100%;
+    height: 90%;
+    background-color: #E8F5E9;
+    border: 2px solid #1B5E20;
+    border-radius: 30px;
+    box-shadow: #1B5E20 3px 3px 0 0;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0 12px;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+
+/* Alert validasi data kosong */
+.alert-form {
+    margin-top: 5px;
+    line-height: 30px;
+    background-color: #EF5350;
+    color: #fff;
+    font-family: 'PT Sans', sans-serif;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+/* End Alert validasi data kosong */
+
+
+/* Button Simpan Saat Tambah */
+.button-simpan {
+    appearance: none;
+    background-color: #00ADB5;
+    border: 2px solid #EEEEEE;
+    border-radius: 09px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: normal;
+    margin: 0;
+    min-height: 10px;
+    min-width: 0;
+    outline: none;
+    padding: 10px 6px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 12%;
+    will-change: transform;
+    -webkit-border-radius: 09px;
+    -moz-border-radius: 09px;
+    -ms-border-radius: 09px;
+    -o-border-radius: 09px;
+}
+
+.button-simpan:disabled {
+pointer-events: none;
+}
+
+.button-simpan:hover { color: #fff; background-color: #222831; box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px; transform: translateY(-2px); -webkit-transform: translateY(-2px); -moz-transform: translateY(-2px); -ms-transform: translateY(-2px); -o-transform: translateY(-2px);
+}
+
+.button-simpan:active { box-shadow: none; transform: translateY(0); -webkit-transform: translateY(0); -moz-transform: translateY(0); -ms-transform: translateY(0); -o-transform: translateY(0);
+}
+
+/* End Button Simpan Saat Tambah */
+
+/* Jarak Judul */
+.hr-style{
+    border: 0;
+    height: 10px;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+}
+
+/* Button pencarian */
+.searchButton {
+    background-color: #00ADB5;
+    color: #fff;
+    width: 100%;
+    border: 1px solid #000000;
+    border-radius: 5px; /* Hanya perlu satu definisi border-radius */
+}
+
+.searchButton:hover {
+    background-color: #E0E0E0;
+    color: #000000;
+}
