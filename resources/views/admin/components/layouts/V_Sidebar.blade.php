@@ -36,8 +36,8 @@
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Master</span></li>
                     <!-- Data Akun -->
                     <li
-                        class="{{ request()->is('akun/dataAkun') || request()->is('admin/debit') ? 'menu-item active' : 'menu-item' }}">
-                        <a href="<?= url('akun/dataAkun') ?>" class="menu-link">
+                        class="{{ request()->is('akun/dataakun') || request()->is('admin/debit') ? 'menu-item active' : 'menu-item' }}">
+                        <a href="<?= url('akun/dataakun') ?>" class="menu-link">
                             <i class="menu-icon tf-icons bi bi-person-bounding-box"></i>
                             <div data-i18n="Basic">Data Akun</div>
                         </a>

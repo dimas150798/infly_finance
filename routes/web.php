@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\C_DashboardAdmin;
+use App\Http\Controllers\admin\data_akun\C_DataAkun;
 use App\Http\Controllers\C_Login;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,14 @@ Route::get('/home', function () {
     return redirect('/admin/dashboard');
 });
 
+// Apabila belum login dia tidak bisa masuk
+Route::get('/login', [C_Login::class, 'index'])->name('login');
+Route::post('/login', [C_Login::class, 'login']);
+
 Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     // Admin Dashboard
     Route::get('/admin/dashboard', [C_DashboardAdmin::class, 'index'])->name('admin.dashboard');
+
+    // Data Akun
+    Route::get('/akun/dataakun', [C_DataAkun::class, 'index'])->name('akun.dataakun');
 });
