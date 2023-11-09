@@ -27,4 +27,6 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
 
     // Data Akun
     Route::get('/akun/dataakun', [C_DataAkun::class, 'index'])->name('akun.dataakun');
+    Route::get('/akun/formtambahakun', [C_DataAkun::class, 'formtambahakun'])->name('akun.formtambahakun');
+    Route::post('/akun/simpantambahakun', [C_DataAkun::class, 'simpantambahakun'])->name('akun.simpantambahakun');
 });
