@@ -35,12 +35,19 @@ class C_Login extends Controller
             if (Auth::user()->role == 'admin') {
                 return redirect()->route('admin.dashboard')->with('alert-success', 'Login Berhasil');
             } elseif (Auth::user()->role == 'superadmin') {
-                echo "Fitur Belum Ada";
+                return redirect()->route('superadmin.dashboard')->with('alert-info', 'Selamat datang, Superadmin! Fitur Belum Ada');
             } else {
-                echo "Fitur Belum Ada";
+                return redirect()->route('user.dashboard')->with('alert-info', 'Selamat datang, Pengguna! Fitur Belum Ada');
             }
         } else {
-            return redirect('')->with('alert-gagal', 'Login Gagal')->withInput();
+            return redirect()->route('login')->with('alert-danger', 'Login Gagal')->withInput();
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('/')->with('alert-success', 'Logout Berhasil');
     }
 }

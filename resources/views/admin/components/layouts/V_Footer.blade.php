@@ -67,7 +67,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 @include('admin/components/select2/V_Select2')
-@include('admin/components/data_table/V_DataTable')
+{{-- @include('admin/components/data_table/V_DataTable') --}}
 @include('admin/components/alert/V_Alert')
 
 </body>
