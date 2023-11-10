@@ -49,4 +49,6 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     Route::post('/jurnal/simpantambahkredit', [C_DataJurnal::class, 'simpantambahkredit'])->name('jurnal.simpantambahkredit');
     // Export To Excel
     Route::get('/jurnal/exporttoexcel', [C_DataJurnal::class, 'exporttoexcel'])->name('jurnal.exporttoexcel');
+    // Posting Data Jurnal Ke Buku Besar
+    Route::get('/jurnal/postingjurnal', [C_DataJurnal::class, 'postingjurnalkebukubesar'])->name('jurnal.postingjurnal');
 });

@@ -24,7 +24,7 @@
                                     class="bi bi-plus-circle-fill text-warning"></i> Add Kredit</a></li>
                         <li><a class="dropdown-item export-excel" href="<?= url('jurnal/exporttoexcel') ?>"><i
                                     class="bi bi-file-earmark-spreadsheet-fill text-warning "></i> Export Excel</a></li>
-                        <li><a class="dropdown-item posting" href="<?= url('bukubesar/postingJurnal') ?>"><i
+                        <li><a class="dropdown-item posting" href="<?= url('jurnal/postingjurnal') ?>"><i
                                     class="bi bi-floppy-fill text-warning "></i> Posting Buku
                                 Besar</a></li>
                     </ul>
