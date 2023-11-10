@@ -205,9 +205,6 @@ class C_DataJurnal extends Controller
                         'note_jurnal'       => $note_jurnal,
                         'status_jurnal'     => $status_jurnal
                     ]);
-
-                    // Add success notification
-                    return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Posting Berhasil  ');
                 } elseif ($jurnal->status_jurnal == 'Kredit') {
                     M_BukuBesar::create([
                         'id_jurnal'         => $id_jurnal,
@@ -219,14 +216,10 @@ class C_DataJurnal extends Controller
                         'note_jurnal'       => $note_jurnal,
                         'status_jurnal'     => $status_jurnal
                     ]);
-
-                    // Add success notification
-                    return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Posting Berhasil  ');
                 }
-            } else {
-                // Jika data sudah ada di 'buku_besar', tambahkan notifikasi
-                return redirect()->route('jurnal.datajurnal')->with('alert-gagal', 'Data dengan nama akun dan reff jurnal sudah ada');
             }
         }
+
+        return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Posting Berhasil  ');
     }
 }
