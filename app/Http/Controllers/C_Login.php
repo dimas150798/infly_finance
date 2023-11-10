@@ -32,6 +32,7 @@ class C_Login extends Controller
         ];
 
         if (Auth::attempt($DataLogin)) {
+            // Authentication successful
             if (Auth::user()->role == 'admin') {
                 return redirect()->route('admin.dashboard')->with('alert-success', 'Login Berhasil');
             } elseif (Auth::user()->role == 'superadmin') {
@@ -40,7 +41,17 @@ class C_Login extends Controller
                 return redirect()->route('user.dashboard')->with('alert-info', 'Selamat datang, Pengguna! Fitur Belum Ada');
             }
         } else {
-            return redirect()->route('login')->with('alert-danger', 'Login Gagal')->withInput();
+            // Authentication failed
+            $credentials = ['email' => $DataLogin['email']];
+
+            // Check if the email exists in the database
+            if (!Auth::getProvider()->retrieveByCredentials($credentials)) {
+                // Email does not exist
+                return redirect()->route('login')->with('alert-gagal', 'Email tidak terdaftar')->withInput();
+            } else {
+                // Email exists, but password is incorrect
+                return redirect()->route('login')->with('alert-gagal', 'Password salah')->withInput();
+            }
         }
     }
 
