@@ -25,7 +25,7 @@ class C_DataAkun extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $editUrl = route('akun.formeditakun', ['id_akun' => $row->id_akun]);
-                    // $deleteUrl = route('akun.deleteAkun', ['id_akun' => $row->id_akun]);
+                    $deleteUrl = route('akun.deleteakun', ['id_akun' => $row->id_akun]);
 
                     $actionBtn = '<div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,7 +33,7 @@ class C_DataAkun extends Controller
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item edit-alert" href="' . $editUrl . '"><i class="bi bi-pencil-square"></i> Edit</a></li>
-                            <li><a class="dropdown-item delete-alert" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                            <li><a class="dropdown-item delete-alert" href="' . $deleteUrl . '"><i class="bi bi-trash"></i> Delete</a></li>
                         </ul>
                     </div>';
                     return $actionBtn;
@@ -114,5 +114,22 @@ class C_DataAkun extends Controller
         $akun->save();
 
         return redirect()->route('akun.dataakun')->with('alert-success', 'Data akun berhasil diperbarui');
+    }
+
+    // Delete Data
+    public function DeleteData($id_akun)
+    {
+        $akun = M_Akun::find($id_akun);
+
+        if ($akun) {
+            try {
+                $akun->delete();
+                return response()->json(['success' => 'Akun berhasil dihapus']);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Gagal menghapus akun: ' . $e->getMessage()], 500);
+            }
+        }
+
+        return response()->json(['error' => 'Akun tidak ditemukan'], 404);
     }
 }

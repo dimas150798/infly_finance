@@ -33,4 +33,6 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     // Edit Akun
     Route::get('/akun/formeditakun/{id_akun}', [C_DataAkun::class, 'formeditakun'])->name('akun.formeditakun');
     Route::post('/akun/simpaneditakun/{id_akun}', [C_DataAkun::class, 'simpaneditakun'])->name('akun.simpaneditakun');
+    // Delete Akun
+    Route::get('/akun/deleteakun/{id_akun}', [C_DataAkun::class, 'deletedata'])->name('akun.deleteakun');
 });
