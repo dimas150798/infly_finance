@@ -20,7 +20,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="<?= url('jurnal/formtambahdebit') ?>"><i
                                     class="bi bi-plus-circle-fill text-warning"></i> Add Debit</a></li>
-                        <li><a class="dropdown-item" href="<?= url('jurnal/addKredit') ?>"><i
+                        <li><a class="dropdown-item" href="<?= url('jurnal/formtambahkredit') ?>"><i
                                     class="bi bi-plus-circle-fill text-warning"></i> Add Kredit</a></li>
                         <li><a class="dropdown-item export-excel" href="<?= url('jurnal/exportJurnal') ?>"><i
                                     class="bi bi-file-earmark-spreadsheet-fill text-warning "></i> Export Excel</a></li>

@@ -106,4 +106,43 @@ class C_DataJurnal extends Controller
 
         return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Data berhasil ditambahkan');
     }
+
+    // Tambah Data Kredit
+    function FormTambahKredit()
+    {
+        $title = 'Tambah Debit | Admin';
+        $reff_kredit = "JU/" . date('y/m') . '/';
+
+        $options = M_Akun::all();
+
+        return view('admin/data_jurnal/V_TambahKredit', compact('title', 'options', 'reff_kredit'));
+    }
+
+    function SimpanTambahKredit(Request $request)
+    {
+        // Validasi data input
+        $request->validate(
+            [
+                'tanggal_kredit'     => 'required',
+                'nama_akun'         => 'required',
+                'reff_kredit'        => 'required'
+            ],
+            [
+                'tanggal_kredit.required'   => htmlspecialchars('Tanggal Wajib Di isi !', ENT_QUOTES, 'UTF-8'),
+                'nama_akun.required'        => htmlspecialchars('Nama Akun Wajib Di isi !', ENT_QUOTES, 'UTF-8'),
+                'reff_kredit.required'      => htmlspecialchars('Reff Wajib Di isi !', ENT_QUOTES, 'UTF-8')
+            ]
+        );
+
+        M_Jurnal::create([
+            'tanggal_jurnal'    => $request->tanggal_kredit,
+            'nama_akun'         => $request->nama_akun,
+            'reff_jurnal'       => $request->reff_kredit,
+            'nominal_jurnal'    => $request->nominal_kredit,
+            'note_jurnal'       => $request->note_kredit,
+            'status_jurnal'     => 'Kredit'
+        ]);
+
+        return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Data berhasil ditambahkan');
+    }
 }

@@ -44,4 +44,7 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     // Tambah Debit Di Jurnal
     Route::get('/jurnal/formtambahdebit', [C_DataJurnal::class, 'formtambahdebit'])->name('jurnal.formtambahdebit');
     Route::post('/jurnal/simpantambahdebit', [C_DataJurnal::class, 'simpantambahdebit'])->name('jurnal.simpantambahdebit');
+    // Tambah Kredit Di Jurnal
+    Route::get('/jurnal/formtambahkredit', [C_DataJurnal::class, 'formtambahkredit'])->name('jurnal.formtambahkredit');
+    Route::post('/jurnal/simpantambahkredit', [C_DataJurnal::class, 'simpantambahkredit'])->name('jurnal.simpantambahkredit');
 });
