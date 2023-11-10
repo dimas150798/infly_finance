@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\admin\data_akun;
 
+use App\Exports\AkunExport;
 use App\Http\Controllers\Controller;
 use App\Models\M_Akun;
 use Illuminate\Http\Request;
 use DataTables;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class C_DataAkun extends Controller
 {
@@ -131,5 +132,21 @@ class C_DataAkun extends Controller
         }
 
         return response()->json(['error' => 'Akun tidak ditemukan'], 404);
+    }
+
+    // download excel
+    public function ExportToExcel()
+    {
+        $data = M_Akun::select([
+            'kode_akun',
+            'nama_akun',
+            'tipe_akun',
+        ])
+            ->orderBy('kode_akun', 'ASC')
+            ->get();
+
+
+        // Export the data using the JurnalExport export class
+        return Excel::download(new AkunExport($data), 'DataAkun.xlsx');
     }
 }

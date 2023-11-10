@@ -35,4 +35,6 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     Route::post('/akun/simpaneditakun/{id_akun}', [C_DataAkun::class, 'simpaneditakun'])->name('akun.simpaneditakun');
     // Delete Akun
     Route::get('/akun/deleteakun/{id_akun}', [C_DataAkun::class, 'deletedata'])->name('akun.deleteakun');
+    // Export To Excel
+    Route::get('/akun/exporttoexcel', [C_DataAkun::class, 'exporttoexcel'])->name('akun.exporttoexcel');
 });

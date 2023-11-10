@@ -17,7 +17,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="<?= url('akun/formtambahakun') ?>"><i
                                     class="bi bi-plus-circle-fill text-warning"></i> Add Akun</a></li>
-                        <li><a class="dropdown-item" href="<?= url('akun/exportAkun') ?>"><i
+                        <li><a class="dropdown-item" href="<?= url('akun/exporttoexcel') ?>"><i
                                     class="bi bi-file-earmark-spreadsheet-fill text-warning"></i> Export Excel</a></li>
                     </ul>
                 </div>
