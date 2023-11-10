@@ -27,6 +27,10 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
 
     // Data Akun
     Route::get('/akun/dataakun', [C_DataAkun::class, 'index'])->name('akun.dataakun');
+    // Tambah Akun
     Route::get('/akun/formtambahakun', [C_DataAkun::class, 'formtambahakun'])->name('akun.formtambahakun');
     Route::post('/akun/simpantambahakun', [C_DataAkun::class, 'simpantambahakun'])->name('akun.simpantambahakun');
+    // Edit Akun
+    Route::get('/akun/formeditakun/{id_akun}', [C_DataAkun::class, 'formeditakun'])->name('akun.formeditakun');
+    Route::post('/akun/simpaneditakun/{id_akun}', [C_DataAkun::class, 'simpaneditakun'])->name('akun.simpaneditakun');
 });

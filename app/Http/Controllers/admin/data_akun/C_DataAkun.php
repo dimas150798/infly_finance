@@ -24,7 +24,7 @@ class C_DataAkun extends Controller
                     return $count++;
                 })
                 ->addColumn('action', function ($row) {
-                    // $editUrl = route('akun.editAkun', ['id_akun' => $row->id_akun]);
+                    $editUrl = route('akun.formeditakun', ['id_akun' => $row->id_akun]);
                     // $deleteUrl = route('akun.deleteAkun', ['id_akun' => $row->id_akun]);
 
                     $actionBtn = '<div class="dropdown">
@@ -32,7 +32,7 @@ class C_DataAkun extends Controller
                             Action
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item edit-alert" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
+                            <li><a class="dropdown-item edit-alert" href="' . $editUrl . '"><i class="bi bi-pencil-square"></i> Edit</a></li>
                             <li><a class="dropdown-item delete-alert" href="#"><i class="bi bi-trash"></i> Delete</a></li>
                         </ul>
                     </div>';
@@ -78,5 +78,41 @@ class C_DataAkun extends Controller
         ]);
 
         return redirect()->route('akun.dataakun')->with('alert-success', 'Data berhasil ditambahkan');
+    }
+
+    // Edit Data
+    function FormEditAkun($id_akun)
+    {
+        $title = 'Edit Akun | Admin';
+
+        $akun = M_Akun::find($id_akun);
+
+        if (!$akun) {
+            return redirect()->route('akun.dataakun')->with('alert-danger', 'Akun tidak ditemukan');
+        }
+
+        return view('admin/data_akun/V_EditAkun', compact('title', 'akun'));
+    }
+
+    public function SimpanEditAkun(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'kode_akun' => 'required',
+            'nama_akun' => 'required',
+            'tipe_akun' => 'required',
+        ]);
+
+        $akun = M_Akun::find($id);
+
+        if (!$akun) {
+            return redirect()->route('akun.dataakun')->with('alert-gagal', 'Akun tidak ditemukan');
+        }
+
+        $akun->kode_akun = $validatedData['kode_akun'];
+        $akun->nama_akun = $validatedData['nama_akun'];
+        $akun->tipe_akun = $validatedData['tipe_akun'];
+        $akun->save();
+
+        return redirect()->route('akun.dataakun')->with('alert-success', 'Data akun berhasil diperbarui');
     }
 }
