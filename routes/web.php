@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\C_DashboardAdmin;
 use App\Http\Controllers\admin\data_akun\C_DataAkun;
+use App\Http\Controllers\admin\data_jurnal\C_DataJurnal;
 use App\Http\Controllers\C_Login;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +38,10 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     Route::get('/akun/deleteakun/{id_akun}', [C_DataAkun::class, 'deletedata'])->name('akun.deleteakun');
     // Export To Excel
     Route::get('/akun/exporttoexcel', [C_DataAkun::class, 'exporttoexcel'])->name('akun.exporttoexcel');
+
+    // Data Jurnal
+    Route::get('/jurnal/datajurnal', [C_DataJurnal::class, 'index'])->name('jurnal.datajurnal');
+    // Tambah Debit Di Jurnal
+    Route::get('/jurnal/formtambahdebit', [C_DataJurnal::class, 'formtambahdebit'])->name('jurnal.formtambahdebit');
+    Route::post('/jurnal/simpantambahdebit', [C_DataJurnal::class, 'simpantambahdebit'])->name('jurnal.simpantambahdebit');
 });

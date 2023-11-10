@@ -44,8 +44,8 @@
                     </li>
                     <!-- Data Jurnal -->
                     <li
-                        class="{{ request()->is('jurnal/dataJurnal') || request()->is('jurnal/dataDebit') || request()->is('jurnal/dataKredit') ? 'menu-item active' : 'menu-item' }}">
-                        <a href="<?= url('jurnal/dataJurnal') ?>" class="menu-link">
+                        class="{{ request()->is('jurnal/datajurnal') || request()->is('jurnal/dataDebit') || request()->is('jurnal/dataKredit') ? 'menu-item active' : 'menu-item' }}">
+                        <a href="<?= url('jurnal/datajurnal') ?>" class="menu-link">
                             <i class="menu-icon tf-icons bi bi-card-checklist"></i>
                             <div data-i18n="Basic">Data Jurnal</div>
                         </a>
