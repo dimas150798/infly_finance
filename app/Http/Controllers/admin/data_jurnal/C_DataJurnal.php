@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\admin\data_jurnal;
 
+use App\Exports\JurnalExport;
 use App\Http\Controllers\Controller;
 use App\Models\M_Akun;
 use App\Models\M_Jurnal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class C_DataJurnal extends Controller
 {
@@ -144,5 +146,26 @@ class C_DataJurnal extends Controller
         ]);
 
         return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Data berhasil ditambahkan');
+    }
+
+    // download excel
+    public function ExportToExcel()
+    {
+        $data = M_Jurnal::select([
+            'tanggal_jurnal',
+            'nama_akun',
+            'reff_jurnal',
+            'nominal_jurnal',
+            'note_jurnal',
+            'status_jurnal',
+        ])
+            ->whereBetween('tanggal_jurnal', [session('start_date'), session('end_date')])
+            ->orderBy('reff_jurnal')
+            ->orderBy('status_jurnal')
+            ->get();
+
+
+        // Export the data using the JurnalExport export class
+        return Excel::download(new JurnalExport($data), 'DataJurnal.xlsx');
     }
 }

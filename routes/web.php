@@ -47,4 +47,6 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     // Tambah Kredit Di Jurnal
     Route::get('/jurnal/formtambahkredit', [C_DataJurnal::class, 'formtambahkredit'])->name('jurnal.formtambahkredit');
     Route::post('/jurnal/simpantambahkredit', [C_DataJurnal::class, 'simpantambahkredit'])->name('jurnal.simpantambahkredit');
+    // Export To Excel
+    Route::get('/jurnal/exporttoexcel', [C_DataJurnal::class, 'exporttoexcel'])->name('jurnal.exporttoexcel');
 });
