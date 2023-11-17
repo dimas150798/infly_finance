@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\buku_besar\C_BukuBesar;
 use App\Http\Controllers\admin\C_DashboardAdmin;
 use App\Http\Controllers\admin\data_akun\C_DataAkun;
 use App\Http\Controllers\admin\data_jurnal\C_DataJurnal;
@@ -51,4 +52,7 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     Route::get('/jurnal/exporttoexcel', [C_DataJurnal::class, 'exporttoexcel'])->name('jurnal.exporttoexcel');
     // Posting Data Jurnal Ke Buku Besar
     Route::get('/jurnal/postingjurnal', [C_DataJurnal::class, 'postingjurnalkebukubesar'])->name('jurnal.postingjurnal');
+
+    // Buku Besar
+    Route::get('/bukubesar/bukubesar', [C_BukuBesar::class, 'index'])->name('bukubesar.bukubesar');
 });

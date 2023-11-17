@@ -51,8 +51,8 @@
                         </a>
                     </li>
                     <!-- Data Jurnal -->
-                    <li class="{{ request()->is('bukubesar/bukuBesar') ? 'menu-item active' : 'menu-item' }}">
-                        <a href="<?= url('bukubesar/bukuBesar') ?>" class="menu-link">
+                    <li class="{{ request()->is('bukubesar/bukubesar') ? 'menu-item active' : 'menu-item' }}">
+                        <a href="<?= url('bukubesar/bukubesar') ?>" class="menu-link">
                             <i class="menu-icon tf-icons bi bi-book-half"></i>
                             <div data-i18n="Basic">Buku Besar</div>
                         </a>
