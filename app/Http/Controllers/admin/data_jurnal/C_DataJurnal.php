@@ -44,7 +44,7 @@ class C_DataJurnal extends Controller
                     return $count++;
                 })
                 ->addColumn('action', function ($row) {
-                    // $editUrl = route('jurnal.editJurnal', ['id_jurnal' => $row->id_jurnal]);
+                    $editUrl = route('jurnal.formeditjurnal', ['id_jurnal' => $row->id_jurnal]);
                     // $deleteUrl = route('jurnal.deleteJurnal', ['id_jurnal' => $row->id_jurnal]);
 
                     $actionBtn = '<div class="dropdown">
@@ -52,7 +52,7 @@ class C_DataJurnal extends Controller
                             Action
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item edit-alert" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
+                            <li><a class="dropdown-item edit-alert" href="' . $editUrl . '"><i class="bi bi-pencil-square"></i> Edit</a></li>
                             <li><a class="dropdown-item delete-alert" href="#"><i class="bi bi-trash"></i> Delete</a></li>
                         </ul>
                     </div>';
@@ -221,5 +221,64 @@ class C_DataJurnal extends Controller
         }
 
         return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Posting Berhasil  ');
+    }
+
+    // Edit Data Jurnal
+    function FormEditJurnal($id_jurnal)
+    {
+        $title = 'Edit Jurnal | Admin';
+
+        $jurnal = M_Jurnal::select('data_jurnal.*', 'data_akun.*',)
+            ->join('data_akun', 'data_jurnal.nama_akun', '=', 'data_akun.nama_akun')
+            ->find($id_jurnal);
+
+        if (empty($jurnal)) {
+            return redirect()->route('jurnal.datajurnal')->with('alert-gagal', 'Akun tidak ditemukan');
+        }
+
+        return view('admin/data_jurnal/V_EditJurnal', compact('title', 'jurnal'));
+    }
+
+    public function SimpanEditJurnal(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nama_akun'         => 'required',
+            'status_jurnal'     => 'required',
+            'tanggal_jurnal'    => 'required',
+            'reff_jurnal'       => 'required',
+            'nominal_jurnal'    => 'required',
+            'note_jurnal'       => 'required'
+        ]);
+
+        // Update Jurnal
+        $jurnal     = M_Jurnal::where('id_jurnal', $id)->first();
+
+        // Update Buku Besar
+        $bukubesar  = M_BukuBesar::Where('id_jurnal', $id)->first();
+
+        $jurnal->update([
+            'tanggal_jurnal'     => $validatedData['tanggal_jurnal'],
+            'reff_jurnal'        => $validatedData['reff_jurnal'],
+            'nominal_jurnal'     => $validatedData['nominal_jurnal'],
+            'note_jurnal'        => $validatedData['note_jurnal'],
+        ]);
+
+        if ($validatedData['status_jurnal'] == 'Debit') {
+            $bukubesar->update([
+                'tanggal_jurnal'    => $validatedData['tanggal_jurnal'],
+                'reff_jurnal'       => $validatedData['reff_jurnal'],
+                'nominal_debit'     => $validatedData['nominal_jurnal'],
+                'note_jurnal'       => $validatedData['note_jurnal'],
+            ]);
+        } elseif ($validatedData['status_jurnal'] == 'Kredit') {
+            $bukubesar->update([
+                'tanggal_jurnal'    => $validatedData['tanggal_jurnal'],
+                'reff_jurnal'       => $validatedData['reff_jurnal'],
+                'nominal_kredit'    => $validatedData['nominal_jurnal'],
+                'note_jurnal'       => $validatedData['note_jurnal'],
+            ]);
+        }
+
+        return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Data akun berhasil diperbarui');
     }
 }

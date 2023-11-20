@@ -52,6 +52,9 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     Route::get('/jurnal/exporttoexcel', [C_DataJurnal::class, 'exporttoexcel'])->name('jurnal.exporttoexcel');
     // Posting Data Jurnal Ke Buku Besar
     Route::get('/jurnal/postingjurnal', [C_DataJurnal::class, 'postingjurnalkebukubesar'])->name('jurnal.postingjurnal');
+    // Edit Data Jurnal
+    Route::get('/jurnal/formeditjurnal/{id_jurnal}', [C_DataJurnal::class, 'formeditjurnal'])->name('jurnal.formeditjurnal');
+    Route::post('/jurnal/simpaneditjurnal/{id_jurnal}', [C_DataJurnal::class, 'simpaneditjurnal'])->name('jurnal.simpaneditjurnal');
 
     // Buku Besar
     Route::get('/bukubesar/bukubesar', [C_BukuBesar::class, 'index'])->name('bukubesar.bukubesar');
