@@ -55,6 +55,8 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     // Edit Data Jurnal
     Route::get('/jurnal/formeditjurnal/{id_jurnal}', [C_DataJurnal::class, 'formeditjurnal'])->name('jurnal.formeditjurnal');
     Route::post('/jurnal/simpaneditjurnal/{id_jurnal}', [C_DataJurnal::class, 'simpaneditjurnal'])->name('jurnal.simpaneditjurnal');
+    // Delete Data Jurnal
+    Route::get('/jurnal/deletejurnal/{id_jurnal}', [C_DataJurnal::class, 'deletedata'])->name('jurnal.deletejurnal');
 
     // Buku Besar
     Route::get('/bukubesar/bukubesar', [C_BukuBesar::class, 'index'])->name('bukubesar.bukubesar');

@@ -73,44 +73,28 @@
     });
 </script>
 
-{{-- Delete data --}}
+{{-- Delete Data --}}
 <script>
     $(document).on('click', '.delete-alert', function(e) {
-        e.preventDefault(); // Prevent the default link behavior
-        var deleteUrl = $(this).attr('href');
-        var trObj = $(this).closest("tr");
+        e.preventDefault();
+        var url = $(this).attr('href');
 
         Swal.fire({
-            title: "Yakin Melakukan Delete?",
-            text: "Data yang dihapus tidak dapat dikembalikan!",
+            title: "Yakin Melakukan Delete ?",
+            text: "Data Yang Didelete Tidak Bisa Kembali!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Yes, Delete",
             cancelButtonText: "Cancel"
         }).then(function(result) {
             if (result.isConfirmed) {
-                $.ajax({
-                    url: deleteUrl,
-                    type: 'GET', // Use 'DELETE' for a deletion operation
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data.success) {
-                            trObj.remove();
-                            Swal.fire('Deleted!', 'The user has been deleted.', 'success');
-                        } else {
-                            Swal.fire('Error!', 'Failed to delete user: ' + data.error,
-                                'error');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire('Error!', 'An error occurred while deleting the user.',
-                            'error');
-                    }
-                });
+                window.location.href = url;
             }
         });
     });
 </script>
+
+
 
 {{-- Download Excel --}}
 <script>

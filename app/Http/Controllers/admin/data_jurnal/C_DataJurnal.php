@@ -45,7 +45,7 @@ class C_DataJurnal extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $editUrl = route('jurnal.formeditjurnal', ['id_jurnal' => $row->id_jurnal]);
-                    // $deleteUrl = route('jurnal.deleteJurnal', ['id_jurnal' => $row->id_jurnal]);
+                    $deleteUrl = route('jurnal.deletejurnal', ['id_jurnal' => $row->id_jurnal]);
 
                     $actionBtn = '<div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,7 +53,7 @@ class C_DataJurnal extends Controller
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item edit-alert" href="' . $editUrl . '"><i class="bi bi-pencil-square"></i> Edit</a></li>
-                            <li><a class="dropdown-item delete-alert" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                            <li><a class="dropdown-item delete-alert" href="' . $deleteUrl . '"><i class="bi bi-trash"></i> Delete</a></li>
                         </ul>
                     </div>';
                     return $actionBtn;
@@ -256,29 +256,55 @@ class C_DataJurnal extends Controller
         // Update Buku Besar
         $bukubesar  = M_BukuBesar::Where('id_jurnal', $id)->first();
 
-        $jurnal->update([
-            'tanggal_jurnal'     => $validatedData['tanggal_jurnal'],
-            'reff_jurnal'        => $validatedData['reff_jurnal'],
-            'nominal_jurnal'     => $validatedData['nominal_jurnal'],
-            'note_jurnal'        => $validatedData['note_jurnal'],
-        ]);
+        if ($bukubesar == NULL) {
+            $jurnal->update([
+                'tanggal_jurnal'     => $validatedData['tanggal_jurnal'],
+                'reff_jurnal'        => $validatedData['reff_jurnal'],
+                'nominal_jurnal'     => $validatedData['nominal_jurnal'],
+                'note_jurnal'        => $validatedData['note_jurnal'],
+            ]);
+        } else {
+            $jurnal->update([
+                'tanggal_jurnal'     => $validatedData['tanggal_jurnal'],
+                'reff_jurnal'        => $validatedData['reff_jurnal'],
+                'nominal_jurnal'     => $validatedData['nominal_jurnal'],
+                'note_jurnal'        => $validatedData['note_jurnal'],
+            ]);
 
-        if ($validatedData['status_jurnal'] == 'Debit') {
-            $bukubesar->update([
-                'tanggal_jurnal'    => $validatedData['tanggal_jurnal'],
-                'reff_jurnal'       => $validatedData['reff_jurnal'],
-                'nominal_debit'     => $validatedData['nominal_jurnal'],
-                'note_jurnal'       => $validatedData['note_jurnal'],
-            ]);
-        } elseif ($validatedData['status_jurnal'] == 'Kredit') {
-            $bukubesar->update([
-                'tanggal_jurnal'    => $validatedData['tanggal_jurnal'],
-                'reff_jurnal'       => $validatedData['reff_jurnal'],
-                'nominal_kredit'    => $validatedData['nominal_jurnal'],
-                'note_jurnal'       => $validatedData['note_jurnal'],
-            ]);
+            if ($validatedData['status_jurnal'] == 'Debit') {
+                $bukubesar->update([
+                    'tanggal_jurnal'    => $validatedData['tanggal_jurnal'],
+                    'reff_jurnal'       => $validatedData['reff_jurnal'],
+                    'nominal_debit'     => $validatedData['nominal_jurnal'],
+                    'note_jurnal'       => $validatedData['note_jurnal'],
+                ]);
+            } elseif ($validatedData['status_jurnal'] == 'Kredit') {
+                $bukubesar->update([
+                    'tanggal_jurnal'    => $validatedData['tanggal_jurnal'],
+                    'reff_jurnal'       => $validatedData['reff_jurnal'],
+                    'nominal_kredit'    => $validatedData['nominal_jurnal'],
+                    'note_jurnal'       => $validatedData['note_jurnal'],
+                ]);
+            }
         }
 
+
         return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Data akun berhasil diperbarui');
+    }
+
+    // Delete Data
+    public function DeleteData($id_jurnal)
+    {
+        $jurnal = M_Jurnal::where('id_jurnal', $id_jurnal)->first();
+        $bukubesar = M_BukuBesar::where('id_jurnal', $id_jurnal)->first();
+
+        if ($bukubesar == NULL) {
+            $jurnal->delete();
+        } else {
+            $jurnal->delete();
+            $bukubesar->delete();
+        }
+
+        return redirect()->route('jurnal.datajurnal')->with('alert-success', 'Data akun berhasil dihapus');
     }
 }
