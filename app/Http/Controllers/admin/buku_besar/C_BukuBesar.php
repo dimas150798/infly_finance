@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\admin\buku_besar;
 
+use App\Exports\BukuBesarExport;
 use App\Http\Controllers\Controller;
 use App\Models\M_Akun;
 use App\Models\M_BukuBesar;
 use Illuminate\Http\Request;
 use DataTables;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class C_BukuBesar extends Controller
 {
@@ -49,16 +51,16 @@ class C_BukuBesar extends Controller
                     // $editUrl = route('jurnal.editJurnal', ['id_jurnal' => $row->id_jurnal]);
                     // $deleteUrl = route('jurnal.deleteJurnal', ['id_jurnal' => $row->id_jurnal]);
 
-                    $actionBtn = '<div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Action
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item edit-alert" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
-                            <li><a class="dropdown-item delete-alert" href="#"><i class="bi bi-trash"></i> Delete</a></li>
-                        </ul>
-                    </div>';
-                    return $actionBtn;
+                    // $actionBtn = '<div class="dropdown">
+                    //     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    //         Action
+                    //     </button>
+                    //     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    //         <li><a class="dropdown-item edit-alert" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
+                    //         <li><a class="dropdown-item delete-alert" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                    //     </ul>
+                    // </div>';
+                    // return $actionBtn;
                 })
                 ->addColumn('tanggal_jurnal', function ($row) {
                     return Carbon::parse($row->tanggal_jurnal)->format('d F Y');
@@ -72,5 +74,27 @@ class C_BukuBesar extends Controller
         $nama_akun  = session('nama_akun');
 
         return view('admin/buku_besar/V_BukuBesar', compact('title', 'options', 'bulan', 'tahun', 'nama_akun'));
+    }
+
+    // download excel
+    public function ExportToExcel()
+    {
+        $data = M_BukuBesar::select([
+            'tanggal_jurnal',
+            'nama_akun',
+            'reff_jurnal',
+            'nominal_debit',
+            'nominal_kredit',
+            'note_jurnal',
+        ])
+            ->whereMonth('tanggal_jurnal', '=', session('bulan'))
+            ->whereYear('tanggal_jurnal', '=', session('tahun'))
+            ->where('nama_akun', '=', session('nama_akun'))
+            ->orderBy('reff_jurnal')
+            ->orderBy('status_jurnal')
+            ->get();
+
+        // Export the data using the JurnalExport export class
+        return Excel::download(new BukuBesarExport($data), 'BukuBesar.xlsx');
     }
 }

@@ -60,4 +60,6 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
 
     // Buku Besar
     Route::get('/bukubesar/bukubesar', [C_BukuBesar::class, 'index'])->name('bukubesar.bukubesar');
+    // Export To Excel
+    Route::get('/bukubesar/exporttoexcel', [C_BukuBesar::class, 'exporttoexcel'])->name('bukubesar.exporttoexcel');
 });

@@ -136,12 +136,12 @@
                     data: 'note_jurnal',
                     name: 'note_jurnal'
                 },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
+                // {
+                //     data: 'action',
+                //     name: 'action',
+                //     orderable: false,
+                //     searchable: false
+                // },
             ],
         });
 

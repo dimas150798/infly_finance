@@ -23,7 +23,10 @@ class C_DataJurnal extends Controller
             $end_date = $request->input('end_date');
 
             if (empty($start_date) && empty($end_date)) {
-                $start_date = now()->toDateString();
+                $month = Carbon::now()->startOfMonth()->toDateString();
+                $year = Carbon::now()->startOfYear()->toDateString();
+
+                $start_date = $month;
                 $end_date = now()->toDateString();
 
                 session(['start_date' => $start_date, 'end_date' => $end_date]);
@@ -65,7 +68,10 @@ class C_DataJurnal extends Controller
                 ->make(true);
         }
 
-        $start_date = session('start_date', now()->toDateString());
+        $month = Carbon::now()->startOfMonth()->toDateString();
+        $year = Carbon::now()->startOfYear()->toDateString();
+
+        $start_date = $month;
         $end_date = session('end_date', now()->toDateString());
 
         return view('admin/data_jurnal/V_DataJurnal', compact('title', 'start_date', 'end_date'));
@@ -75,6 +81,7 @@ class C_DataJurnal extends Controller
     function FormTambahDebit()
     {
         $title = 'Tambah Debit | Admin';
+
         $reff_debit = "JU/" . date('y/m') . '/';
 
         $options = M_Akun::all();

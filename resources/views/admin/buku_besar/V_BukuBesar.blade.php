@@ -18,7 +18,7 @@
                         Fitur
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item export-excel" href="<?= url('bukubesar/exportBukuBesar') ?>"><i
+                        <li><a class="dropdown-item export-excel" href="<?= url('bukubesar/exporttoexcel') ?>"><i
                                     class="bi bi-file-earmark-spreadsheet-fill text-warning "></i> Export Excel</a></li>
                     </ul>
                 </div>
@@ -87,7 +87,7 @@
                             <th>Nominal Debit</th>
                             <th>Nominal Kredit</th>
                             <th>Note Jurnal</th>
-                            <th style="width: 15%">Action</th>
+                            {{-- <th style="width: 15%">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
