@@ -7,7 +7,7 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
-            <h4><span class="text-muted fw-light">Forms /</span> Data Debit</h4>
+            <h4><span class="text-muted fw-light">Forms /</span> Pembelian</h4>
         </div>
 
         <hr class="col-12 hr-style mb-4">
@@ -19,7 +19,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
 
-                        <form action="<?= url('jurnal/simpantambahdebit') ?>" method="post">
+                        <form action="<?= url('pembelian/saveaddpembelian') ?>" method="post">
                             @csrf
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-company">Tanggal <span
@@ -88,13 +88,21 @@
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-company">Nominal</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-5">
                                     <div class="input-group input-group-merge">
                                         <span id="basic-icon-default-phone2" class="input-group-text"><i
                                                 class="bi bi-cash"></i></span>
                                         <input type="text" class="form-control" id="nominal_debit"
-                                            name="nominal_debit" value="{{ old('nominal_debit') }}"
-                                            placeholder="Masukkan nominal debit..." oninput="formatNumber(this)" />
+                                            name="nominal_debit" placeholder="Masukkan nominal debit..."
+                                            oninput="convertToIDR()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-phone2" class="input-group-text"><i
+                                                class="bi bi-cash"></i></span>
+                                        <input type="text" class="form-control" id="nominal_idr" name="nominal_idr"
+                                            placeholder="Nominal IDR..." readonly />
                                     </div>
                                 </div>
                             </div>

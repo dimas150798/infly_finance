@@ -4,6 +4,9 @@ use App\Http\Controllers\admin\buku_besar\C_BukuBesar;
 use App\Http\Controllers\admin\C_DashboardAdmin;
 use App\Http\Controllers\admin\data_akun\C_DataAkun;
 use App\Http\Controllers\admin\data_jurnal\C_DataJurnal;
+use App\Http\Controllers\admin\data_pembelian\C_AddPembelian;
+use App\Http\Controllers\admin\data_pembelian\C_ExportExcel;
+use App\Http\Controllers\admin\data_pembelian\C_Pembelian;
 use App\Http\Controllers\C_Login;
 use Illuminate\Support\Facades\Route;
 
@@ -62,4 +65,12 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     Route::get('/bukubesar/bukubesar', [C_BukuBesar::class, 'index'])->name('bukubesar.bukubesar');
     // Export To Excel
     Route::get('/bukubesar/exporttoexcel', [C_BukuBesar::class, 'exporttoexcel'])->name('bukubesar.exporttoexcel');
+
+    // Data Pembelian
+    Route::get('/pembelian/datapembelian', [C_Pembelian::class, 'index'])->name('pembelian.datapembelian');
+    // Tambah Debit Di Jurnal
+    Route::get('/pembelian/formaddpembelian', [C_AddPembelian::class, 'formaddpembelian'])->name('pembelian.formaddpembelian');
+    Route::post('/pembelian/saveaddpembelian', [C_AddPembelian::class, 'saveaddpembelian'])->name('pembelian.saveaddpembelian');
+    // Export To Excel
+    Route::get('/pembelian/exporttoexcel', [C_ExportExcel::class, 'exporttoexcel'])->name('pembelian.exporttoexcel');
 });

@@ -7,14 +7,13 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-
-class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, WithCustomStartCell, WithStyles, WithColumnFormatting
+class Export_Pembelian implements FromCollection, ShouldAutoSize, WithEvents, WithCustomStartCell, WithStyles, WithColumnFormatting
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -32,6 +31,21 @@ class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, Wit
         return $this->data;
     }
 
+    public function map($data): array
+    {
+        return [
+            Date::dateTimeToExcel($data->tanggal_jurnal),
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => NumberFormat::FORMAT_CURRENCY_IDR,
+            'A' => NumberFormat::FORMAT_DATE_XLSX15
+        ];
+    }
+
     public function startCell(): string
     {
         return 'A5';
@@ -41,18 +55,17 @@ class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, Wit
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-
                 // Judul Excel
                 $event->sheet->setCellValue('A1', 'PT. URBAN TEKNOLOGI NUSANTARA');
-                $event->sheet->setCellValue('A2', 'DATA BUKU BESAR');
+                $event->sheet->setCellValue('A2', 'DATA PEMBELIAN');
 
                 // Judul Table
-                $event->sheet->setCellValue('A4', 'Tanggal Jurnal');
+                $event->sheet->setCellValue('A4', 'Tanggal');
                 $event->sheet->setCellValue('B4', 'Nama Akun');
-                $event->sheet->setCellValue('C4', 'Reff Jurnal');
-                $event->sheet->setCellValue('D4', 'Nominal Debit');
-                $event->sheet->setCellValue('E4', 'Nominal Kredit');
-                $event->sheet->setCellValue('F4', 'Note Jurnal');
+                $event->sheet->setCellValue('C4', 'Reff Pembelian');
+                $event->sheet->setCellValue('D4', 'Nominal');
+                $event->sheet->setCellValue('E4', 'Keterangan');
+                $event->sheet->setCellValue('F4', 'Status Pembelian');
 
                 // Panjang
                 $highestRow         = $event->sheet->getDelegate()->getHighestRow();
@@ -76,13 +89,6 @@ class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, Wit
                 $event->sheet->mergeCells('A2:F2');
                 // AP pembelian dan AR pendapatan
             },
-        ];
-    }
-
-    public function columnFormats(): array
-    {
-        return [
-            'A' => NumberFormat::FORMAT_DATE_DDMMYYYY
         ];
     }
 

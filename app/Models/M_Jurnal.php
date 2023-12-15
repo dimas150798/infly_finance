@@ -13,12 +13,17 @@ class M_Jurnal extends Model
     protected $primaryKey = 'id_jurnal';
     public $timestamps = false;
 
+    protected $casts = [
+        'tanggal_jurnal' => 'date:d-m-Y',
+    ];
+
     protected $fillable = [
         'tanggal_jurnal',
         'nama_akun',
         'reff_jurnal',
         'nominal_jurnal',
         'note_jurnal',
-        'status_jurnal'
+        'status_jurnal',
+        'rincian_jurnal'
     ];
 }

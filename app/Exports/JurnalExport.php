@@ -4,11 +4,14 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class JurnalExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
+
+class JurnalExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents, WithColumnFormatting
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -23,6 +26,13 @@ class JurnalExport implements FromCollection, WithHeadings, ShouldAutoSize, With
     public function collection()
     {
         return $this->data;
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => NumberFormat::FORMAT_CURRENCY_IDR, // This format includes comma as the thousand separator
+        ];
     }
 
     public function headings(): array

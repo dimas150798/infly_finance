@@ -43,6 +43,12 @@
                         </a>
                     </li>
                     <!-- Data Jurnal -->
+                    <li class="{{ request()->is('pembelian/datapembelian') ? 'menu-item active' : 'menu-item' }}">
+                        <a href="<?= url('pembelian/datapembelian') ?>" class="menu-link">
+                            <i class="menu-icon tf-icons bi bi-cart-check-fill"></i>
+                            <div data-i18n="Basic">Data Pembelian</div>
+                        </a>
+                    </li>
                     <li
                         class="{{ request()->is('jurnal/datajurnal') || request()->is('jurnal/dataDebit') || request()->is('jurnal/dataKredit') ? 'menu-item active' : 'menu-item' }}">
                         <a href="<?= url('jurnal/datajurnal') ?>" class="menu-link">

@@ -66,6 +66,27 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
+<script>
+    function convertToIDR() {
+        // Ambil nilai dari input nominal_debit
+        let nominalDebit = document.getElementById('nominal_debit').value;
+
+        // Konversi nilai ke format IDR
+        let nominalIDR = formatIDR(nominalDebit);
+
+        // Set nilai di input nominal_idr
+        document.getElementById('nominal_idr').value = nominalIDR;
+    }
+
+    function formatIDR(number) {
+        // Format number ke format IDR
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR'
+        }).format(number);
+    }
+</script>
+
 @include('admin/components/select2/V_Select2')
 @include('admin/components/data_table/V_DataTable')
 @include('admin/components/alert/V_Alert')

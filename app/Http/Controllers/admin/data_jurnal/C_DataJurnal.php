@@ -36,7 +36,7 @@ class C_DataJurnal extends Controller
             }
 
             $data = M_Jurnal::select('*')
-                ->orderBy('reff_jurnal', 'asc')
+                ->orderBy('reff_jurnal', 'desc')
                 ->orderBy('status_jurnal', 'asc');
 
             $data->whereBetween('tanggal_jurnal', [$start_date, $end_date]);

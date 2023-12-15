@@ -12,6 +12,7 @@ class NumberFormat extends Supervisor
     const FORMAT_NUMBER = '0';
     const FORMAT_NUMBER_0 = '0.0';
     const FORMAT_NUMBER_00 = '0.00';
+    const FORMAT_NUMBER_000 = '0.000';
     const FORMAT_NUMBER_COMMA_SEPARATED1 = '#,##0.00';
     const FORMAT_NUMBER_COMMA_SEPARATED2 = '#,##0.00_-';
 
@@ -90,11 +91,14 @@ class NumberFormat extends Supervisor
     const FORMAT_ACCOUNTING_USD = '_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)';
     const FORMAT_ACCOUNTING_EUR = '_("€"* #,##0.00_);_("€"* \(#,##0.00\);_("€"* "-"??_);_(@_)';
 
+    const FORMAT_CURRENCY_IDR = '#,##0.00_-';
+
     /**
      * Excel built-in number formats.
      *
      * @var array
      */
+
     protected static $builtInFormats;
 
     /**
@@ -427,8 +431,8 @@ class NumberFormat extends Supervisor
 
         return md5(
             $this->formatCode .
-            $this->builtInFormatCode .
-            __CLASS__
+                $this->builtInFormatCode .
+                __CLASS__
         );
     }
 
