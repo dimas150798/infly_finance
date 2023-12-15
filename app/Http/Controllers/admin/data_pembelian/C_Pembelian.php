@@ -4,13 +4,9 @@ namespace App\Http\Controllers\admin\data_pembelian;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Exports\JurnalExport;
-use App\Models\M_Akun;
-use App\Models\M_BukuBesar;
 use App\Models\M_Jurnal;
 use Carbon\Carbon;
 use DataTables;
-use Maatwebsite\Excel\Facades\Excel;
 
 class C_Pembelian extends Controller
 {
@@ -41,7 +37,6 @@ class C_Pembelian extends Controller
                 ->orderBy('reff_jurnal', 'desc')
                 ->orderBy('status_jurnal', 'asc')
                 ->get();
-
 
             $data->whereBetween('tanggal_jurnal', [$start_date, $end_date]);
             $count = 1;
