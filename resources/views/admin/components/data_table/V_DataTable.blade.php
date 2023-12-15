@@ -95,7 +95,7 @@
 {{-- Show Data Pembelian --}}
 <script type="text/javascript">
     $(document).ready(function() {
-        var table = $('.pembelian').DataTable({
+        var table = $('.data-pembelian').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,

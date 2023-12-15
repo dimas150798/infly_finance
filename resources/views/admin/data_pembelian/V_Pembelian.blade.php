@@ -48,7 +48,7 @@
         </div>
 
         <div class="card p-3">
-            <table class="table table-bordered pembelian">
+            <table class="table table-bordered data-pembelian" id="data-pembelian">
                 <thead>
                     <tr>
                         <th style="width: 5%">No</th>
