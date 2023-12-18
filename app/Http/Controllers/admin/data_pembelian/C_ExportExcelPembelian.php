@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\M_Jurnal;
 use Maatwebsite\Excel\Facades\Excel;
 
-class C_ExportExcel extends Controller
+class C_ExportExcelPembelian extends Controller
 {
     // download excel
     public function ExportToExcel()

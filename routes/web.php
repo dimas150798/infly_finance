@@ -5,8 +5,10 @@ use App\Http\Controllers\admin\C_DashboardAdmin;
 use App\Http\Controllers\admin\data_akun\C_DataAkun;
 use App\Http\Controllers\admin\data_jurnal\C_DataJurnal;
 use App\Http\Controllers\admin\data_pembelian\C_AddPembelian;
-use App\Http\Controllers\admin\data_pembelian\C_ExportExcel;
+use App\Http\Controllers\admin\data_pembelian\C_EditPembelian;
+use App\Http\Controllers\admin\data_pembelian\C_ExportExcelPembelian;
 use App\Http\Controllers\admin\data_pembelian\C_Pembelian;
+use App\Http\Controllers\admin\data_pembelian\C_PostingBukuBesarPembelian;
 use App\Http\Controllers\C_Login;
 use Illuminate\Support\Facades\Route;
 
@@ -68,9 +70,17 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
 
     // Data Pembelian
     Route::get('/pembelian/datapembelian', [C_Pembelian::class, 'index'])->name('pembelian.datapembelian');
-    // Tambah Debit Di Jurnal
+    // Tambah Pembelian
     Route::get('/pembelian/formaddpembelian', [C_AddPembelian::class, 'formaddpembelian'])->name('pembelian.formaddpembelian');
     Route::post('/pembelian/saveaddpembelian', [C_AddPembelian::class, 'saveaddpembelian'])->name('pembelian.saveaddpembelian');
+    // Edit Pembelian
+    Route::get('/pembelian/formedit/{id_jurnal}', [C_EditPembelian::class, 'formedit'])->name('pembelian.formedit');
+    Route::post('/pembelian/saveedit/{id_jurnal}', [C_EditPembelian::class, 'saveedit'])->name('pembelian.saveedit');
+    // Delete Pembelian
+    Route::get('/pembelian/deletepembelian/{id_jurnal}', [C_Pembelian::class, 'deletedata'])->name('pembelian.deletepembelian');
+
     // Export To Excel
-    Route::get('/pembelian/exporttoexcel', [C_ExportExcel::class, 'exporttoexcel'])->name('pembelian.exporttoexcel');
+    Route::get('/pembelian/exporttoexcel', [C_ExportExcelPembelian::class, 'exporttoexcel'])->name('pembelian.exporttoexcel');
+    // Postin Pembelian To Buku Besar
+    Route::get('/pembelian/postingpembelian', [C_PostingBukuBesarPembelian::class, 'postingbukubesar'])->name('pembelian.postingbukubesar');
 });

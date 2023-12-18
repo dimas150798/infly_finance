@@ -24,6 +24,15 @@ class M_Jurnal extends Model
         'nominal_jurnal',
         'note_jurnal',
         'status_jurnal',
-        'rincian_jurnal'
+        'rincian_jurnal',
+        'posting_bukubesar'
     ];
+
+    protected static function booted()
+    {
+        static::retrieved(function ($model) {
+            // Mengonversi tanggal_jurnal ke format yang diinginkan tanpa waktu
+            $model->tanggal_jurnal = $model->tanggal_jurnal->format('d-m-Y');
+        });
+    }
 }

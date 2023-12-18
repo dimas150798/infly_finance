@@ -28,7 +28,7 @@
                             <li><a class="dropdown-item export-excel" href="<?= url('pembelian/exporttoexcel') ?>"><i
                                         class="bi bi-file-earmark-spreadsheet-fill text-warning "></i> Export Excel</a>
                             </li>
-                            <li><a class="dropdown-item posting" href="<?= url('jurnal/postingjurnal') ?>"><i
+                            <li><a class="dropdown-item posting" href="<?= url('pembelian/postingpembelian') ?>"><i
                                         class="bi bi-floppy-fill text-warning "></i> Posting Buku
                                     Besar</a></li>
                         </ul>

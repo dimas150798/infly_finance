@@ -189,11 +189,17 @@
                 },
                 {
                     data: 'nominal_debit',
-                    name: 'nominal_debit'
+                    name: 'nominal_debit',
+                    render: function(data, type, full, meta) {
+                        return formatIDR(data);
+                    }
                 },
                 {
                     data: 'nominal_kredit',
-                    name: 'nominal_kredit'
+                    name: 'nominal_kredit',
+                    render: function(data, type, full, meta) {
+                        return formatIDR(data);
+                    }
                 },
                 {
                     data: 'note_jurnal',

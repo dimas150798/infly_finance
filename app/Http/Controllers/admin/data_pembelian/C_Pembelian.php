@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\data_pembelian;
 
 use App\Http\Controllers\Controller;
+use App\Models\M_BukuBesar;
 use Illuminate\Http\Request;
 use App\Models\M_Jurnal;
 use Carbon\Carbon;
@@ -34,6 +35,7 @@ class C_Pembelian extends Controller
             $data = M_Jurnal::select('*')
                 ->where('rincian_jurnal', 'Pembelian')
                 ->where('status_jurnal', 'Debit')
+                ->where('posting_bukubesar', NULL)
                 ->orderBy('reff_jurnal', 'desc')
                 ->orderBy('status_jurnal', 'asc')
                 ->get();
@@ -46,8 +48,8 @@ class C_Pembelian extends Controller
                     return $count++;
                 })
                 ->addColumn('action', function ($row) {
-                    $editUrl = route('jurnal.formeditjurnal', ['id_jurnal' => $row->id_jurnal]);
-                    $deleteUrl = route('jurnal.deletejurnal', ['id_jurnal' => $row->id_jurnal]);
+                    $editUrl = route('pembelian.formedit', ['id_jurnal' => $row->id_jurnal]);
+                    $deleteUrl = route('pembelian.deletepembelian', ['id_jurnal' => $row->id_jurnal]);
 
                     $actionBtn = '<div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,5 +76,46 @@ class C_Pembelian extends Controller
         $end_date = session('end_date', now()->toDateString());
 
         return view('admin/data_pembelian/V_Pembelian', compact('title', 'start_date', 'end_date'));
+    }
+
+    // Delete Data
+    public function DeleteData($id_jurnal)
+    {
+        // Delete Jurnal Pembelian (ALL Selain KAS)
+        $jurnal = M_Jurnal::where('id_jurnal', $id_jurnal)->first();
+        $reff_jurnal = $jurnal->reff_jurnal;
+
+        // Delete Jurnal Pembelian (KAS)
+        $jurnal_kas = M_Jurnal::where('nama_akun', 'Kas')
+            ->where('reff_jurnal', $reff_jurnal)
+            ->first();
+
+        // Update Buku Besar Bebit (ALL Selain KAS)
+        $bukubesar = M_BukuBesar::where('id_jurnal', $id_jurnal)->first();
+
+        // Update Buku Besar Kredit (KAS)
+        $bukubesar_kas = M_BukuBesar::where('nama_akun', 'Kas')
+            ->where('reff_jurnal', $reff_jurnal)
+            ->first();
+
+
+        if ($bukubesar == NULL) {
+            // Debit Pembelian
+            $jurnal->delete();
+            // Kredit Pembelian
+            $jurnal_kas->delete();
+        } else {
+            // Debit Pembelian
+            $jurnal->delete();
+            // Kredit Pembelian
+            $jurnal_kas->delete();
+
+            // Debit Pembelian
+            $bukubesar->delete();
+            // Kredit Pembelian
+            $bukubesar_kas->delete();
+        }
+
+        return redirect()->route('pembelian.datapembelian')->with('alert-success', 'Pembelian Berhasil Dihapus');
     }
 }
