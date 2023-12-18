@@ -14936,7 +14936,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   font-size: 0.75rem;
   letter-spacing: 0.4px;
   white-space: nowrap;
-  color: #37474F;
+  color: #d4d4d4;
 }
 
 .menu-inner > .menu-header {
@@ -15043,8 +15043,9 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 .menu-vertical,
 .menu-vertical .menu-block,
 .menu-vertical .menu-inner > .menu-item {
-  width: 15rem;
+  width: 17rem;
 }
+
 .menu-vertical:first-of-type,
 .menu-vertical .menu-block:first-of-type,
 .menu-vertical .menu-inner > .menu-item:first-of-type {
@@ -15267,7 +15268,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   position: relative;
   padding-top: 0.25rem;
   padding-bottom: 0.2rem;
-  height: 4rem;
+  height: 3.5rem;
   flex-wrap: nowrap;
   color: #89868d;
   z-index: 2;
@@ -15516,6 +15517,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 .layout-menu-fixed body:not(.modal-open) .layout-content-navbar .layout-navbar,
 .layout-menu-fixed-offcanvas body:not(.modal-open) .layout-content-navbar .layout-navbar {
   z-index: 1075;
+  width: 100%;
 }
 
 .layout-footer-fixed .content-footer {
@@ -15676,7 +15678,21 @@ html:not(.layout-footer-fixed) .content-wrapper {
   display: block;
 }
 
+.app-brand-infly {
+  display: flex;
+  text-align: center;
+
+}
+
+.app-brand-judul {
+  text-transform: uppercase;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity 0.1s ease-in-out;
+}
+
 .app-brand-text {
+  color: #fff;
   text-transform: uppercase;
   flex-shrink: 0;
   opacity: 1;
@@ -15692,6 +15708,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 }
 .app-brand .layout-menu-toggle svg {
   color: #3a3541;
+  text-align: center;
 }
 
 .menu-vertical .app-brand {
@@ -15755,6 +15772,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
   position: relative;
   width: 2.5rem;
   height: 2.5rem;
+  margin-right: 20px;
   cursor: pointer;
 }
 .avatar img {

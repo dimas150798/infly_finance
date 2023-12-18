@@ -5,27 +5,28 @@
 <div class="content-wrapper">
     <!-- Content -->
 
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-xxl">
 
-        <div class="row">
-            <div class="col-5">
-                <h4><span class="text-muted fw-light">Data Buku Besar /</span> Table</h4>
-            </div>
-            <div class="col-7 d-flex justify-content-end">
-                <div class="dropdown-fitur">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Fitur
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item export-excel" href="<?= url('bukubesar/exporttoexcel') ?>"><i
-                                    class="bi bi-file-earmark-spreadsheet-fill text-warning "></i> Export Excel</a></li>
-                    </ul>
+        <div class="header-judul mb-3">
+            <div class="row">
+                <div class="col-5">
+                    <h1>Buku Besar</h1>
+                </div>
+                <div class="col-7 d-flex justify-content-end">
+                    <div class="dropdown-fitur">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Fitur
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item export-excel" href="<?= url('bukubesar/exporttoexcel') ?>"><i
+                                        class="bi bi-file-earmark-spreadsheet-fill text-warning "></i> Export Excel</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <hr class="col-12 hr-style mb-4">
 
         <!-- Basic Bootstrap Table -->
         <div class="row mb-3">
