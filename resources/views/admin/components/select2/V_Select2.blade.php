@@ -10,6 +10,18 @@
     });
 </script>
 
+{{-- Nama Akun --}}
+<script>
+    $(document).ready(function() {
+        $('#nama_area').select2({
+            theme: "bootstrap-5",
+            placeholder: "Pilih Nama Area",
+            selectionCssClass: "select2--small",
+            dropdownCssClass: "select2--small"
+        });
+    });
+</script>
+
 {{-- Pilihan Nama Bulan --}}
 <script>
     $(document).ready(function() {

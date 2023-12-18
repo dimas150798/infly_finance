@@ -25,6 +25,7 @@ class M_Jurnal extends Model
         'note_jurnal',
         'status_jurnal',
         'rincian_jurnal',
+        'nama_area',
         'posting_bukubesar'
     ];
 

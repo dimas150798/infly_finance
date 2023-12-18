@@ -9,7 +9,7 @@
         <div class="header-judul mb-3">
             <div class="row">
                 <div class="col-12">
-                    <h1>Forms / </span>Pembelian</h1>
+                    <h1>Forms / </span>Pendapatan</h1>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
 
-                        <form action="<?= url('pembelian/saveaddpembelian') ?>" method="post">
+                        <form action="<?= url('pendapatan/saveaddpendapatan') ?>" method="post">
                             @csrf
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-company">Tanggal <span
@@ -69,6 +69,31 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Nama Area<span
+                                        class="text-danger">*</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <select id="nama_area" name="nama_area" class="form-select">
+                                        <option value=""></option>
+                                        @foreach ($area as $area)
+                                            <option value="{{ $area->nama_area }}"
+                                                {{ old('nama_area') == $area->nama_area ? 'selected' : '' }}>
+                                                {{ $area->nama_area }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('nama_area'))
+                                        <div class="alert-form">
+                                            <ul>
+                                                @foreach ($errors->get('nama_area') as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-company">Reff <span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-10">
@@ -95,7 +120,7 @@
                                         <span id="basic-icon-default-phone2" class="input-group-text"><i
                                                 class="bi bi-cash"></i></span>
                                         <input type="text" class="form-control" id="nominal_jurnal"
-                                            name="nominal_jurnal" placeholder="Masukkan nominal..."
+                                            name="nominal_jurnal" placeholder="Masukkan nominal jurnal..."
                                             oninput="convertToIDR()" />
                                     </div>
                                 </div>

@@ -42,20 +42,27 @@
                             <div data-i18n="Basic">Data Akun</div>
                         </a>
                     </li>
-                    <!-- Data Jurnal -->
+                    <!-- Data Pembelian -->
                     <li class="{{ request()->is('pembelian/datapembelian') ? 'menu-item active' : 'menu-item' }}">
                         <a href="<?= url('pembelian/datapembelian') ?>" class="menu-link">
                             <i class="menu-icon tf-icons bi bi-cart-check-fill"></i>
                             <div data-i18n="Basic">Data Pembelian</div>
                         </a>
                     </li>
-                    <li
+                    <!-- Data Pendapatan -->
+                    <li class="{{ request()->is('pendapatan/datapendapatan') ? 'menu-item active' : 'menu-item' }}">
+                        <a href="<?= url('pendapatan/datapendapatan') ?>" class="menu-link">
+                            <i class="menu-icon tf-icons bi bi-wallet"></i>
+                            <div data-i18n="Basic">Data Pendapatan</div>
+                        </a>
+                    </li>
+                    {{-- <li
                         class="{{ request()->is('jurnal/datajurnal') || request()->is('jurnal/dataDebit') || request()->is('jurnal/dataKredit') ? 'menu-item active' : 'menu-item' }}">
                         <a href="<?= url('jurnal/datajurnal') ?>" class="menu-link">
                             <i class="menu-icon tf-icons bi bi-card-checklist"></i>
                             <div data-i18n="Basic">Data Jurnal</div>
                         </a>
-                    </li>
+                    </li> --}}
                     <!-- Data Jurnal -->
                     <li class="{{ request()->is('bukubesar/bukubesar') ? 'menu-item active' : 'menu-item' }}">
                         <a href="<?= url('bukubesar/bukubesar') ?>" class="menu-link">

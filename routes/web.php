@@ -9,6 +9,10 @@ use App\Http\Controllers\admin\data_pembelian\C_EditPembelian;
 use App\Http\Controllers\admin\data_pembelian\C_ExportExcelPembelian;
 use App\Http\Controllers\admin\data_pembelian\C_Pembelian;
 use App\Http\Controllers\admin\data_pembelian\C_PostingBukuBesarPembelian;
+use App\Http\Controllers\admin\data_pendapatan\C_AddPendapatan;
+use App\Http\Controllers\admin\data_pendapatan\C_ExportExcelPendapatan;
+use App\Http\Controllers\admin\data_pendapatan\C_Pendapatan;
+use App\Http\Controllers\admin\data_pendapatan\C_PostingBukuBesarPendapatan;
 use App\Http\Controllers\C_Login;
 use Illuminate\Support\Facades\Route;
 
@@ -78,9 +82,18 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     Route::post('/pembelian/saveedit/{id_jurnal}', [C_EditPembelian::class, 'saveedit'])->name('pembelian.saveedit');
     // Delete Pembelian
     Route::get('/pembelian/deletepembelian/{id_jurnal}', [C_Pembelian::class, 'deletedata'])->name('pembelian.deletepembelian');
-
     // Export To Excel
     Route::get('/pembelian/exporttoexcel', [C_ExportExcelPembelian::class, 'exporttoexcel'])->name('pembelian.exporttoexcel');
     // Postin Pembelian To Buku Besar
-    Route::get('/pembelian/postingpembelian', [C_PostingBukuBesarPembelian::class, 'postingbukubesar'])->name('pembelian.postingbukubesar');
+    Route::get('/pembelian/postingpembelian', [C_PostingBukuBesarPembelian::class, 'postingbukubesar'])->name('pembelian.postingpendapatan');
+
+    // Data Pendapatan
+    Route::get('/pendapatan/datapendapatan', [C_Pendapatan::class, 'index'])->name('pendapatan.datapendapatan');
+    // Tambah Pendapatan
+    Route::get('/pendapatan/formaddpendapatan', [C_AddPendapatan::class, 'formaddpendapatan'])->name('pendapatan.formaddpendapatan');
+    Route::post('/pendapatan/saveaddpendapatan', [C_AddPendapatan::class, 'saveaddpendapatan'])->name('pendapatan.saveaddpendapatan');
+    // Export To Excel
+    Route::get('/pendapatan/exporttoexcel', [C_ExportExcelPendapatan::class, 'exporttoexcel'])->name('pendapatan.exporttoexcel');
+    // Postin Pembelian To Pendapatan
+    Route::get('/pendapatan/postingpendapatan', [C_PostingBukuBesarPendapatan::class, 'postingbukubesar'])->name('pendapatan.postingpendapatan');
 });

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin\data_pembelian;
+namespace App\Http\Controllers\admin\data_pendapatan;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\M_BukuBesar;
 use App\Models\M_Jurnal;
-use Illuminate\Http\Request;
 
-class C_PostingBukuBesarPembelian extends Controller
+class C_PostingBukuBesarPendapatan extends Controller
 {
     function PostingBukuBesar()
     {
@@ -27,7 +27,7 @@ class C_PostingBukuBesarPembelian extends Controller
             $status_jurnal      = $jurnal->status_jurnal;
 
             // Update Jurnal Pembelian (ALL Selain KAS)
-            $jurnalstatus_potingbukubesar = M_Jurnal::where('nama_akun', $nama_akun)
+            $jurnalstatus_potingbukubesar = M_Jurnal::where('id_jurnal', $id_jurnal)
                 ->where('reff_jurnal', $reff_jurnal)
                 ->first();
 
@@ -68,6 +68,6 @@ class C_PostingBukuBesarPembelian extends Controller
             }
         }
 
-        return redirect()->route('pembelian.datapembelian')->with('alert-success', 'Posting Berhasil ');
+        return redirect()->route('pendapatan.datapendapatan')->with('alert-success', 'Posting Berhasil ');
     }
 }

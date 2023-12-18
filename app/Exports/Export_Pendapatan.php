@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class Export_Pembelian implements FromCollection, ShouldAutoSize, WithEvents, WithCustomStartCell, WithStyles, WithColumnFormatting
+class Export_Pendapatan implements FromCollection, ShouldAutoSize, WithEvents, WithCustomStartCell, WithStyles, WithColumnFormatting
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -57,7 +57,7 @@ class Export_Pembelian implements FromCollection, ShouldAutoSize, WithEvents, Wi
             AfterSheet::class => function (AfterSheet $event) {
                 // Judul Excel
                 $event->sheet->setCellValue('A1', 'PT. URBAN TEKNOLOGI NUSANTARA');
-                $event->sheet->setCellValue('A2', 'DATA PEMBELIAN');
+                $event->sheet->setCellValue('A2', 'DATA PENDAPATAN');
 
                 // Judul Table
                 $event->sheet->setCellValue('A4', 'Tanggal');
@@ -65,14 +65,15 @@ class Export_Pembelian implements FromCollection, ShouldAutoSize, WithEvents, Wi
                 $event->sheet->setCellValue('C4', 'Reff Pembelian');
                 $event->sheet->setCellValue('D4', 'Nominal');
                 $event->sheet->setCellValue('E4', 'Keterangan');
-                $event->sheet->setCellValue('F4', 'Status');
-                $event->sheet->setCellValue('G4', 'Posting Buku Besar');
+                $event->sheet->setCellValue('F4', 'Area');
+                $event->sheet->setCellValue('G4', 'Status');
+                $event->sheet->setCellValue('H4', 'Posting Buku Besar');
 
                 // Panjang
                 $highestRow         = $event->sheet->getDelegate()->getHighestRow();
                 $highestColumn      = $event->sheet->getDelegate()->getHighestColumn();
 
-                $cellRangeHeader    = 'A4:G4';
+                $cellRangeHeader    = 'A4:H4';
 
                 // Ukuran Text
                 $event->sheet->getDelegate()->getStyle($cellRangeHeader)->getFont()->setSize(13);

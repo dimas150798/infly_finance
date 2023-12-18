@@ -69,7 +69,7 @@
 <script>
     function convertToIDR() {
         // Ambil nilai dari input nominal_debit
-        let nominalDebit = document.getElementById('nominal_debit').value;
+        let nominalDebit = document.getElementById('nominal_jurnal').value;
 
         // Konversi nilai ke format IDR
         let nominalIDR = formatIDR(nominalDebit);

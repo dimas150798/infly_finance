@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\admin\data_pembelian;
+namespace App\Http\Controllers\admin\data_pendapatan;
 
 use App\Http\Controllers\Controller;
 use App\Models\M_Akun;
+use App\Models\M_Area;
 use App\Models\M_Jurnal;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
-class C_AddPembelian extends Controller
+class C_AddPendapatan extends Controller
 {
     // Tambah Data Debit
-    function FormAddPembelian()
+    function FormAddPendapatan()
     {
         $title = 'Tambah Debit | Admin';
 
@@ -39,23 +39,28 @@ class C_AddPembelian extends Controller
         // Buat kode reff_jurnal
         $reff_jurnal = "JU/23/12/" . $kodeIncremented;
 
-        $options = M_Akun::all();
+        $options = M_Akun::where('nama_akun', 'Kas')->get();
 
-        return view('admin/data_pembelian/V_AddPembelian', compact('title', 'options', 'reff_jurnal'));
+        $area = M_Area::All();
+
+
+        return view('admin/data_pendapatan/V_AddPendapatan', compact('title', 'options', 'reff_jurnal', 'area'));
     }
 
-    function SaveAddPembelian(Request $request)
+    function SaveAddPendapatan(Request $request)
     {
         // Validasi data input
         $request->validate(
             [
-                'tanggal_jurnal'        => 'required',
-                'nama_akun'             => 'required',
-                'reff_jurnal'           => 'required'
+                'tanggal_jurnal'     => 'required',
+                'nama_akun'         => 'required',
+                'nama_area'         => 'required',
+                'reff_jurnal'        => 'required'
             ],
             [
                 'tanggal_jurnal.required'   => htmlspecialchars('Tanggal Wajib Di isi !', ENT_QUOTES, 'UTF-8'),
-                'nama_akun.required'        => htmlspecialchars('Nama Akun Wajib Di isi !', ENT_QUOTES, 'UTF-8'),
+                'nama_akun.required'       => htmlspecialchars('Nama Akun Wajib Di isi !', ENT_QUOTES, 'UTF-8'),
+                'nama_area.required'       => htmlspecialchars('Nama Area Wajib Di isi !', ENT_QUOTES, 'UTF-8'),
                 'reff_jurnal.required'      => htmlspecialchars('Reff Wajib Di isi !', ENT_QUOTES, 'UTF-8')
             ]
         );
@@ -68,20 +73,10 @@ class C_AddPembelian extends Controller
             'nominal_jurnal'    => $request->nominal_jurnal,
             'note_jurnal'       => $request->note_jurnal,
             'status_jurnal'     => 'Debit',
-            'rincian_jurnal'    => 'Pembelian'
+            'rincian_jurnal'    => 'Pendapatan',
+            'nama_area'         => $request->nama_area
         ]);
 
-        // Data Kredit
-        M_Jurnal::create([
-            'tanggal_jurnal'    => $request->tanggal_jurnal,
-            'nama_akun'         => 'Kas',
-            'reff_jurnal'       => $request->reff_jurnal,
-            'nominal_jurnal'    => $request->nominal_jurnal,
-            'note_jurnal'       => $request->note_jurnal,
-            'status_jurnal'     => 'Kredit',
-            'rincian_jurnal'    => 'Pembelian'
-        ]);
-
-        return redirect()->route('pembelian.datapembelian')->with('alert-success', 'Data berhasil ditambahkan');
+        return redirect()->route('pendapatan.datapendapatan')->with('alert-success', 'Data berhasil ditambahkan');
     }
 }
