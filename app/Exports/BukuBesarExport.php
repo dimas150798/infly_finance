@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 
 class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, WithCustomStartCell, WithStyles, WithColumnFormatting
@@ -35,6 +36,15 @@ class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, Wit
     public function startCell(): string
     {
         return 'A5';
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => NumberFormat::FORMAT_CURRENCY_IDR,
+            'E' => NumberFormat::FORMAT_CURRENCY_IDR,
+            'A' => NumberFormat::FORMAT_DATE_XLSX15
+        ];
     }
 
     public function registerEvents(): array
@@ -78,13 +88,6 @@ class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, Wit
                 $event->sheet->mergeCells('A2:F2');
                 // AP pembelian dan AR pendapatan
             },
-        ];
-    }
-
-    public function columnFormats(): array
-    {
-        return [
-            'A' => NumberFormat::FORMAT_DATE_DDMMYYYY
         ];
     }
 
