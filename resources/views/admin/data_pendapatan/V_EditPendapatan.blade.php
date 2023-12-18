@@ -9,7 +9,7 @@
         <div class="header-judul mb-3">
             <div class="row">
                 <div class="col-12">
-                    <h1>Forms / </span>Edit Pembelian</h1>
+                    <h1>Forms / </span>Edit Pendapatan</h1>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                     <div class="card-body">
 
                         <form method="POST"
-                            action="{{ route('pembelian.saveedit', ['id_jurnal' => $jurnal->id_jurnal]) }}">
+                            action="{{ route('pendapatan.saveedit', ['id_jurnal' => $jurnal->id_jurnal]) }}">
                             @csrf
                             <div class="row">
                                 <input type="hidden" class="form-control" name="id_jurnal"

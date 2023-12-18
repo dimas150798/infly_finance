@@ -35,7 +35,7 @@ class C_BukuBesar extends Controller
             }
 
             $data = M_BukuBesar::select('*')
-                ->orderBy('reff_jurnal', 'asc')
+                ->orderBy('reff_jurnal', 'desc')
                 ->orderBy('status_jurnal', 'asc');
 
             $data->whereYear('tanggal_jurnal', $tahun)
@@ -80,19 +80,23 @@ class C_BukuBesar extends Controller
     public function ExportToExcel()
     {
         $data = M_BukuBesar::select([
-            'tanggal_jurnal',
-            'nama_akun',
-            'reff_jurnal',
-            'nominal_debit',
-            'nominal_kredit',
-            'note_jurnal',
+            'buku_besar.tanggal_jurnal',
+            'buku_besar.nama_akun',
+            'buku_besar.reff_jurnal',
+            'buku_besar.nominal_debit',
+            'buku_besar.nominal_kredit',
+            'buku_besar.note_jurnal',
+            'data_jurnal.nama_area',
+            'data_jurnal.status_jurnal',
         ])
-            ->whereMonth('tanggal_jurnal', '=', session('bulan'))
-            ->whereYear('tanggal_jurnal', '=', session('tahun'))
-            ->where('nama_akun', '=', session('nama_akun'))
+            ->leftJoin('data_jurnal', 'buku_besar.id_jurnal', '=', 'data_jurnal.id_jurnal')
+            ->whereMonth('buku_besar.tanggal_jurnal', '=', session('bulan'))
+            ->whereYear('buku_besar.tanggal_jurnal', '=', session('tahun'))
+            ->where('buku_besar.nama_akun', '=', session('nama_akun'))
             ->orderBy('reff_jurnal')
             ->orderBy('status_jurnal')
             ->get();
+
 
         // Export the data using the JurnalExport export class
         return Excel::download(new BukuBesarExport($data), 'BukuBesar.xlsx');

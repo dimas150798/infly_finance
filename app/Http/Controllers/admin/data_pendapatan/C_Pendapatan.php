@@ -48,7 +48,7 @@ class C_Pendapatan extends Controller
                     return $count++;
                 })
                 ->addColumn('action', function ($row) {
-                    $editUrl = route('pembelian.formedit', ['id_jurnal' => $row->id_jurnal]);
+                    $editUrl = route('pendapatan.formedit', ['id_jurnal' => $row->id_jurnal]);
                     $deleteUrl = route('pembelian.deletepembelian', ['id_jurnal' => $row->id_jurnal]);
 
                     $actionBtn = '<div class="dropdown">

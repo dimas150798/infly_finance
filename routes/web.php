@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\data_pembelian\C_ExportExcelPembelian;
 use App\Http\Controllers\admin\data_pembelian\C_Pembelian;
 use App\Http\Controllers\admin\data_pembelian\C_PostingBukuBesarPembelian;
 use App\Http\Controllers\admin\data_pendapatan\C_AddPendapatan;
+use App\Http\Controllers\admin\data_pendapatan\C_EditPendapatan;
 use App\Http\Controllers\admin\data_pendapatan\C_ExportExcelPendapatan;
 use App\Http\Controllers\admin\data_pendapatan\C_Pendapatan;
 use App\Http\Controllers\admin\data_pendapatan\C_PostingBukuBesarPendapatan;
@@ -92,6 +93,9 @@ Route::middleware(['auth', 'loginAkses:admin'])->group(function () {
     // Tambah Pendapatan
     Route::get('/pendapatan/formaddpendapatan', [C_AddPendapatan::class, 'formaddpendapatan'])->name('pendapatan.formaddpendapatan');
     Route::post('/pendapatan/saveaddpendapatan', [C_AddPendapatan::class, 'saveaddpendapatan'])->name('pendapatan.saveaddpendapatan');
+    // Edit Pembelian
+    Route::get('/pendapatan/formedit/{id_jurnal}', [C_EditPendapatan::class, 'formedit'])->name('pendapatan.formedit');
+    Route::post('/pendapatan/saveedit/{id_jurnal}', [C_EditPendapatan::class, 'saveedit'])->name('pendapatan.saveedit');
     // Export To Excel
     Route::get('/pendapatan/exporttoexcel', [C_ExportExcelPendapatan::class, 'exporttoexcel'])->name('pendapatan.exporttoexcel');
     // Postin Pembelian To Pendapatan

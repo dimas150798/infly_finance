@@ -52,13 +52,15 @@ class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, Wit
                 $event->sheet->setCellValue('C4', 'Reff Jurnal');
                 $event->sheet->setCellValue('D4', 'Nominal Debit');
                 $event->sheet->setCellValue('E4', 'Nominal Kredit');
-                $event->sheet->setCellValue('F4', 'Note Jurnal');
+                $event->sheet->setCellValue('F4', 'Keterangan');
+                $event->sheet->setCellValue('G4', 'Area');
+                $event->sheet->setCellValue('H4', 'Status');
 
                 // Panjang
                 $highestRow         = $event->sheet->getDelegate()->getHighestRow();
                 $highestColumn      = $event->sheet->getDelegate()->getHighestColumn();
 
-                $cellRangeHeader    = 'A4:F4';
+                $cellRangeHeader    = 'A4:H4';
 
                 // Ukuran Text
                 $event->sheet->getDelegate()->getStyle($cellRangeHeader)->getFont()->setSize(13);
