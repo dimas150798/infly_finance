@@ -39,7 +39,7 @@ class C_AddPendapatan extends Controller
         // Buat kode reff_jurnal
         $reff_jurnal = "JU/23/12/" . $kodeIncremented;
 
-        $options = M_Akun::where('nama_akun', 'Kas')->get();
+        $options = M_Akun::all();
 
         $area = M_Area::All();
 
@@ -65,7 +65,31 @@ class C_AddPendapatan extends Controller
             ]
         );
 
+        // Data Kredit
+        // M_Jurnal::create([
+        //     'tanggal_jurnal'    => $request->tanggal_jurnal,
+        //     'nama_akun'         => $request->nama_akun,
+        //     'reff_jurnal'       => $request->reff_jurnal,
+        //     'nominal_jurnal'    => $request->nominal_jurnal,
+        //     'note_jurnal'       => $request->note_jurnal,
+        //     'status_jurnal'     => 'Kredit',
+        //     'rincian_jurnal'    => 'Pendapatan',
+        //     'nama_area'         => $request->nama_area
+        // ]);
+
         // Data Debit
+        // M_Jurnal::create([
+        //     'tanggal_jurnal'    => $request->tanggal_jurnal,
+        //     'nama_akun'         => 'Kas',
+        //     'reff_jurnal'       => $request->reff_jurnal,
+        //     'nominal_jurnal'    => $request->nominal_jurnal,
+        //     'note_jurnal'       => $request->note_jurnal,
+        //     'status_jurnal'     => 'Debit',
+        //     'rincian_jurnal'    => 'Pendapatan',
+        //     'nama_area'         => $request->nama_area
+        // ]);
+
+        // Debit
         M_Jurnal::create([
             'tanggal_jurnal'    => $request->tanggal_jurnal,
             'nama_akun'         => $request->nama_akun,
