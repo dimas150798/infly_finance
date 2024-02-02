@@ -35,6 +35,7 @@ class C_Pendapatan extends Controller
 
             $data = M_Jurnal::select('*')
                 ->where('rincian_jurnal', 'Pendapatan')
+                ->where('rincian_jurnal', '!=', 'Kas')
                 ->where('posting_bukubesar', NULL)
                 ->orderBy('reff_jurnal', 'desc')
                 ->orderBy('status_jurnal', 'asc')
