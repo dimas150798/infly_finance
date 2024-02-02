@@ -72,7 +72,7 @@ class C_Pembelian extends Controller
         $month = Carbon::now()->startOfMonth()->toDateString();
         $year = Carbon::now()->startOfYear()->toDateString();
 
-        $start_date = $month;
+        $start_date = session('start_date', now()->toDateString());
         $end_date = session('end_date', now()->toDateString());
 
         return view('admin/data_pembelian/V_Pembelian', compact('title', 'start_date', 'end_date'));
