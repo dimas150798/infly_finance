@@ -99,6 +99,6 @@ class C_BukuBesar extends Controller
 
 
         // Export the data using the JurnalExport export class
-        return Excel::download(new BukuBesarExport($data), 'BukuBesar.xlsx');
+        return Excel::download(new BukuBesarExport($data), 'BukuBesar_' . session('nama_akun') . ' ' . '('  . session('bulan') . '-'  . session('tahun') . ')' . '.xlsx');
     }
 }

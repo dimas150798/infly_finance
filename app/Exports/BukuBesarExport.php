@@ -54,7 +54,9 @@ class BukuBesarExport implements FromCollection, ShouldAutoSize, WithEvents, Wit
 
                 // Judul Excel
                 $event->sheet->setCellValue('A1', 'PT. URBAN TEKNOLOGI NUSANTARA');
-                $event->sheet->setCellValue('A2', 'DATA BUKU BESAR');
+                // $event->sheet->setCellValue('A2', 'DATA BUKU BESAR' . ' ' . session('nama_akun') . ' ' . '('  . session('bulan') . '-'  . session('tahun') . ')');
+                $event->sheet->setCellValue('A2', strtoupper('DATA BUKU BESAR' . ' ' . session('nama_akun') . ' ' . '('  . session('bulan') . '-'  . session('tahun') . ')'));
+
 
                 // Judul Table
                 $event->sheet->setCellValue('A4', 'Tanggal Jurnal');
